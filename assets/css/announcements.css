@@ -1,0 +1,339 @@
+/* Plugiit Announcements – every selector is prefixed by .plugiit-ann- */
+.plugiit-ann-bars,
+.plugiit-ann-modal {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.45;
+}
+
+.plugiit-ann-bars *,
+.plugiit-ann-modal *,
+.plugiit-ann-bars *::before,
+.plugiit-ann-modal *::before {
+    box-sizing: border-box;
+}
+
+.plugiit-ann-style-info {
+    --plugiit-ann-bg: #2563eb;
+    --plugiit-ann-fg: #ffffff;
+}
+
+.plugiit-ann-style-success {
+    --plugiit-ann-bg: #15803d;
+    --plugiit-ann-fg: #ffffff;
+}
+
+.plugiit-ann-style-warning {
+    --plugiit-ann-bg: #f59e0b;
+    --plugiit-ann-fg: #1f1300;
+}
+
+.plugiit-ann-style-danger {
+    --plugiit-ann-bg: #c81e1e;
+    --plugiit-ann-fg: #ffffff;
+}
+
+/* Bars */
+.plugiit-ann-bars {
+    position: relative;
+    z-index: 1031;
+    width: 100%;
+    flex-shrink: 0;
+    font-size: 15px;
+}
+
+.plugiit-ann-bar {
+    background: var(--plugiit-ann-bg, #2563eb);
+    color: var(--plugiit-ann-fg, #ffffff);
+}
+
+.plugiit-ann-mode-stacked .plugiit-ann-bar + .plugiit-ann-bar {
+    border-top: 1px solid rgba(0, 0, 0, .15);
+}
+
+.plugiit-ann-mode-rotate .plugiit-ann-bar.plugiit-ann-inactive {
+    display: none;
+}
+
+.plugiit-ann-mode-rotate .plugiit-ann-bar {
+    animation: plugiit-ann-fade .35s ease-out;
+}
+
+.plugiit-ann-bar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem 1rem;
+    max-width: 1320px;
+    min-height: 44px;
+    margin: 0 auto;
+    padding: .5rem 3rem .5rem 1rem;
+    position: relative;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.plugiit-ann-bar-content {
+    min-width: 0;
+}
+
+.plugiit-ann-bar-title {
+    font-weight: 700;
+    margin-right: .35rem;
+}
+
+.plugiit-ann-message p {
+    display: inline;
+    margin: 0;
+}
+
+.plugiit-ann-message p + p::before {
+    content: " ";
+}
+
+.plugiit-ann-bar a:not(.plugiit-ann-btn),
+.plugiit-ann-dialog-message a {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.plugiit-ann-countdown {
+    display: inline-block;
+    margin-left: .5rem;
+    padding: .1rem .5rem;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, .18);
+    font-size: .85em;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.plugiit-ann-countdown:empty {
+    display: none;
+}
+
+.plugiit-ann-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: .3rem .9rem;
+    border: 2px solid currentColor;
+    border-radius: 999px;
+    background: transparent;
+    color: inherit !important;
+    font: inherit;
+    font-size: .875rem;
+    font-weight: 700;
+    text-decoration: none !important;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color .15s;
+}
+
+.plugiit-ann-btn:hover {
+    background: rgba(255, 255, 255, .16);
+}
+
+.plugiit-ann-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    opacity: .85;
+}
+
+.plugiit-ann-close:hover {
+    opacity: 1;
+    background: rgba(0, 0, 0, .15);
+}
+
+.plugiit-ann-bar .plugiit-ann-close {
+    position: absolute;
+    top: 50%;
+    right: .5rem;
+    transform: translateY(-50%);
+}
+
+.plugiit-ann-btn:focus-visible,
+.plugiit-ann-close:focus-visible,
+.plugiit-ann-bar a:focus-visible,
+.plugiit-ann-dot:focus-visible {
+    outline: 3px solid #ffbf47;
+    outline-offset: 2px;
+}
+
+.plugiit-ann-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    position: absolute;
+    left: 50%;
+    bottom: 3px;
+    transform: translateX(-50%);
+}
+
+.plugiit-ann-dot {
+    width: 7px;
+    height: 7px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .45);
+    cursor: pointer;
+}
+
+.plugiit-ann-dot[aria-current="true"] {
+    background: #ffffff;
+}
+
+/* Popup */
+.plugiit-ann-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1060;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background: rgba(8, 8, 14, .6);
+    animation: plugiit-ann-fade .2s ease-out;
+}
+
+.plugiit-ann-modal[hidden] {
+    display: none !important;
+}
+
+.plugiit-ann-dialog {
+    position: relative;
+    width: 100%;
+    max-width: 520px;
+    max-height: 100%;
+    overflow-y: auto;
+    padding: 2rem 1.75rem 1.5rem;
+    border-radius: 16px;
+    background: #ffffff;
+    color: #1d1d27;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .4);
+    text-align: center;
+    font-size: 16px;
+    animation: plugiit-ann-pop .25s ease-out;
+}
+
+.plugiit-ann-dialog:focus {
+    outline: none;
+}
+
+[data-bs-theme="dark"] .plugiit-ann-dialog {
+    background: #212529;
+    color: #f1f3f5;
+}
+
+.plugiit-ann-dialog-accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: var(--plugiit-ann-bg, #2563eb);
+}
+
+.plugiit-ann-dialog-close {
+    position: absolute;
+    top: .75rem;
+    right: .75rem;
+}
+
+.plugiit-ann-dialog-title {
+    margin: 0 1.5rem .75rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.25;
+    color: inherit;
+}
+
+.plugiit-ann-dialog-message {
+    color: inherit;
+    opacity: .9;
+}
+
+.plugiit-ann-dialog-message p {
+    margin: 0 0 .75rem;
+}
+
+.plugiit-ann-countdown-block {
+    margin: .25rem 0 0;
+    background: color-mix(in srgb, var(--plugiit-ann-bg, #2563eb) 14%, transparent);
+    color: inherit;
+}
+
+.plugiit-ann-dialog-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .5rem;
+    margin-top: 1.25rem;
+}
+
+.plugiit-ann-dialog .plugiit-ann-btn {
+    padding: .55rem 1.3rem;
+    font-size: .95rem;
+}
+
+.plugiit-ann-btn-solid {
+    background: var(--plugiit-ann-bg, #2563eb);
+    border-color: var(--plugiit-ann-bg, #2563eb);
+    color: var(--plugiit-ann-fg, #ffffff) !important;
+}
+
+.plugiit-ann-btn-solid:hover {
+    background: var(--plugiit-ann-bg, #2563eb);
+    filter: brightness(1.1);
+}
+
+.plugiit-ann-btn-ghost {
+    border-color: rgba(127, 127, 127, .35);
+}
+
+.plugiit-ann-btn-ghost:hover {
+    background: rgba(127, 127, 127, .12);
+}
+
+@keyframes plugiit-ann-fade {
+    from {
+        opacity: 0;
+    }
+}
+
+@keyframes plugiit-ann-pop {
+    from {
+        opacity: 0;
+        transform: scale(.96) translateY(8px);
+    }
+}
+
+@media (max-width: 575.98px) {
+    .plugiit-ann-bar-inner {
+        padding: .5rem 2.75rem .6rem .75rem;
+        font-size: .9rem;
+    }
+
+    .plugiit-ann-dialog {
+        padding: 1.75rem 1.25rem 1.25rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .plugiit-ann-modal,
+    .plugiit-ann-dialog,
+    .plugiit-ann-mode-rotate .plugiit-ann-bar {
+        animation: none;
+    }
+}
