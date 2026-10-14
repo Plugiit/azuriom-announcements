@@ -2,7 +2,7 @@
     "id": "plugiit-announcements",
     "name": "Plugiit Announcements",
     "description": "Annonces planifiées : barres en haut du site et popups modales, avec ciblage par public, rôle et page, compte à rebours et fermeture mémorisée.",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "url": "https://plugiit.dev",
     "authors": [
         "Plugiit"

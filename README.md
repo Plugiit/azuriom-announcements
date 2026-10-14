@@ -4,7 +4,7 @@
 
 Scheduled announcements for Azuriom: bars at the top of every page and modal popups, targeted by audience, role and page.
 
-Azuriom plugin · v1.0.0 · by Plugiit
+Azuriom plugin · v1.0.1 · by Plugiit
 
 ## Features
 
