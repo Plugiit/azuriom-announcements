@@ -1,58 +1,126 @@
+![Plugiit Announcements](.github/banner.png)
+
 # Plugiit Announcements
 
-Annonces planifiées pour Azuriom : barres en haut du site et popups modales.
+Scheduled announcements for Azuriom: bars at the top of every page and modal popups, targeted by audience, role and page.
 
-## Fonctionnalités
+Azuriom plugin · v1.0.0 · by Plugiit
 
-- **Barres** en haut de toutes les pages et/ou **popup** modale.
-- Message en **Markdown** ou en **HTML simple sécurisé** (liste blanche : `strong`, `em`, `a`, `br`, `p`, `ul`, `li`, `code`… ; scripts, attributs d'événement et liens `javascript:` supprimés).
-- Styles : information, succès, alerte, danger ou couleurs personnalisées (fond + texte).
-- Bouton d'action optionnel (texte + lien absolu ou relatif).
-- Dates de début et de fin, avec **compte à rebours** optionnel jusqu'à la fin (la barre disparaît d'elle-même à l'échéance).
-- Ciblage du public : tout le monde, visiteurs non connectés, membres connectés ou rôles précis.
-- Ciblage des pages : toutes, accueil, boutique ou motifs d'URL (`forum/*`, `vote`, `/` pour l'accueil…).
-- Barres fermables par le visiteur, mémorisé dans son navigateur (`localStorage`) par identifiant **et version** : modifier le titre, le message ou le bouton réaffiche l'annonce.
-- Fréquence du popup : une seule fois, une fois par session ou à chaque chargement.
-- Priorité : ordre des barres et choix du popup (**un seul popup par chargement**, le plus prioritaire qui n'a pas déjà été vu).
-- Plusieurs barres actives : **empilées** ou **en rotation** (durée réglable, pause au survol et au focus, pastilles de navigation).
-- Le popup attend que le visiteur ait répondu au bandeau de [Plugiit Cookie Consent](../plugiit-cookie-consent) s'il est installé, pour ne pas empiler deux fenêtres.
-- Cache des annonces actives, invalidé à chaque création, modification ou suppression.
-- Accessible : région ARIA, fenêtre modale avec focus piégé, Échap pour fermer, boutons libellés.
+## Features
+
+- **Two display types**: bars at the top of every page and/or modal **popups**.
+- **Markdown or safe simple HTML** messages. HTML goes through an allow-list (`strong`, `em`, `a`, `br`, `p`, `ul`, `ol`, `li`, `code`, etc.); scripts, event attributes and `javascript:` links are removed.
+- **Styles**: information, success, warning, danger or custom colors (background + text).
+- **Optional action button** (label + absolute or relative link).
+- **Scheduling** with start and end dates, plus an optional **countdown** until the end date (the bar disappears on its own when it ends).
+- **Audience targeting**: everyone, guests, logged-in members or specific roles.
+- **Page targeting**: all pages, home page, shop or URL patterns (`forum/*`, `vote`, `/` for the home page, etc.).
+- **Dismissible bars**: the choice is stored in the visitor's browser (`localStorage`) per announcement **and version**. Editing the title, message or button shows the announcement again.
+- **Popup frequency**: only once, once per browsing session or on every page load.
+- **Priority**: orders the bars and picks the popup. Only **one popup per page load** is shown: the highest-priority one not already seen.
+- **Multiple active bars**: **stacked** or **rotating** (configurable delay, paused on hover and focus, navigation dots).
+- **Plays well with Plugiit Cookie Consent**: when it is installed, the popup waits until the visitor has answered the cookie banner, so two windows never stack.
+- **Cached** active announcements, invalidated on every creation, update or deletion.
+- **Accessible**: ARIA region, modal with trapped focus, Escape to close, labelled buttons.
+- Action log entries for announcements (created, updated, deleted) and settings changes.
+- English and French translations.
+
+## Requirements
+
+- Azuriom `1.1.0` or later (`azuriom_api` 1.1.0).
 
 ## Installation
 
-1. Copier le dossier dans `plugins/plugiit-announcements` puis activer le plugin dans **Admin > Plugins**.
-2. Créer les annonces dans **Admin > Annonces**.
+**From the Azuriom Market** (recommended): install and enable the plugin from **Admin → Plugins**.
 
-## Administration
+**Manually**:
 
-Permission : `plugiit-announcements.admin`.
+1. Copy the plugin into the `plugins/` directory of your Azuriom installation. The folder **must be named after the plugin ID**, not after the repository:
+
+   ```
+   plugins/plugiit-announcements/
+   ```
+
+2. Enable the plugin from **Admin → Plugins**. The migrations create the `plugiit_announcements` table.
+3. Create your announcements in **Admin → Announcements**.
+
+## Configuration
+
+### Permission
+
+| Permission | Description |
+| --- | --- |
+| `plugiit-announcements.admin` | Manage announcements (bars and popups) |
+
+### Admin pages
 
 | Page | URL |
-|---|---|
-| Liste des annonces | `/admin/plugiit-announcements/announcements` |
-| Créer une annonce | `/admin/plugiit-announcements/announcements/create` |
-| Réglages (barres empilées / rotation) | `/admin/plugiit-announcements/settings` |
+| --- | --- |
+| Announcements list | `/admin/plugiit-announcements/announcements` |
+| Create an announcement | `/admin/plugiit-announcements/announcements/create` |
+| Settings | `/admin/plugiit-announcements/settings` |
 
-Le plugin n'a pas de page publique : les annonces sont injectées par un middleware global sur toutes les pages HTML (hors administration, API, AJAX et pages d'erreur). Les barres sont insérées juste après `<body>`, les popups et le script avant `</body>`.
+The announcements list shows the status of each announcement: running, scheduled, ended or disabled.
 
-## Intégration au thème
+### Announcement fields
 
-Pour placer les barres ailleurs (par exemple sous la barre de navigation), ajoutez dans le thème :
+| Group | Fields |
+| --- | --- |
+| Content | Title (max. 150), message (max. 5000), format (Markdown / simple HTML), button text and link |
+| Display | Type (bar / popup), style, custom background and text colors, dismissible, popup frequency, priority (-100 to 100), enabled |
+| Schedule | Start, end (website timezone), countdown until the end date |
+| Targeting | Audience (everyone / guests / members / roles), pages (all / home / shop / URL patterns) |
+
+URL patterns: one per line, `*` matches anything. Examples: `vote`, `forum/*`, `shop/categories/*`, `/` for the home page.
+
+### Settings
+
+| Setting | Default | Description |
+| --- | --- | --- |
+| Display of several active bars | Stacked | `Stacked` or `Rotating` (one bar at a time). |
+| Display time of each rotating bar | 6 seconds | Between 3 and 60 seconds. |
+
+## Usage
+
+The plugin has no public page. Announcements are injected by a global middleware into every HTML page (except the admin panel, API, AJAX requests and error pages). Bars are inserted right after `<body>`; popups and the script are added before `</body>`.
+
+### Theme integration
+
+To place the bars elsewhere (for example under the navbar), add this to your theme:
 
 ```blade
 @include('plugiit-announcements::bars')
 ```
 
-L'insertion automatique des barres est alors désactivée pour cette page (les popups restent injectés automatiquement).
+The automatic bar insertion is then disabled for that page. Popups are still injected automatically.
 
-Événement émis sur `document` à la fermeture d'un popup : `plugiit-ann:popup-closed`. Fonction globale : `window.PlugiitAnnouncements.closePopup()`.
+### JavaScript API
 
-## Cohabitation
+```js
+// Fired on document when a popup is closed
+document.addEventListener('plugiit-ann:popup-closed', () => { /* ... */ });
 
-Tout le HTML, le CSS et les identifiants sont préfixés par `plugiit-ann-` ; le script est une IIFE sans dépendance. Z-index : barres 1031 (dans le flux de la page), popup 1060, sous le bandeau de cookies (1080).
+// Close the open popup
+window.PlugiitAnnouncements.closePopup();
+```
 
-## Limites
+### Compatibility
 
-- Les dates sont interprétées dans le fuseau horaire du site.
-- La mémorisation « fermée » / « déjà vue » est propre au navigateur du visiteur (pas de suivi côté serveur).
+All HTML, CSS classes and IDs are prefixed with `plugiit-ann-`. The script is a dependency-free IIFE. Z-index: bars `1031` (in the page flow), popup `1060`, below a cookie banner at `1080`.
+
+## Known limitations
+
+- Dates are interpreted in the website timezone.
+- "Closed" / "already seen" states are stored in the visitor's browser only (no server-side tracking).
+
+## Support
+
+Open an issue on GitHub or contact Plugiit.
+
+## Contributing
+
+Issues and pull requests are welcome.
+
+## License
+
+License: to be defined.
