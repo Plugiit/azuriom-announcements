@@ -1,6 +1,6 @@
 <?php
 
-namespace Azuriom\Plugin\PlugiitAnnouncements\Providers;
+namespace Azuriom\Plugin\Announcements\Providers;
 
 use Azuriom\Extensions\Plugin\BaseRouteServiceProvider;
 use Illuminate\Support\Facades\Route;

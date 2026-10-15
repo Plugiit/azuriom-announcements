@@ -1,10 +1,10 @@
 <?php
 
-use Azuriom\Plugin\PlugiitAnnouncements\Controllers\Admin\AnnouncementController;
-use Azuriom\Plugin\PlugiitAnnouncements\Controllers\Admin\SettingController;
+use Azuriom\Plugin\Announcements\Controllers\Admin\AnnouncementController;
+use Azuriom\Plugin\Announcements\Controllers\Admin\SettingController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('can:plugiit-announcements.admin')->group(function () {
+Route::middleware('can:announcements.admin')->group(function () {
     Route::get('/', [AnnouncementController::class, 'index'])->name('index');
 
     Route::get('/settings', [SettingController::class, 'show'])->name('settings');

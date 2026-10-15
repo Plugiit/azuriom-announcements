@@ -1,6 +1,6 @@
 <?php
 
-namespace Azuriom\Plugin\PlugiitAnnouncements\Support;
+namespace Azuriom\Plugin\Announcements\Support;
 
 use DOMDocument;
 use DOMElement;

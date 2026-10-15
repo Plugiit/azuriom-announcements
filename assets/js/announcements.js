@@ -4,7 +4,7 @@
 (function () {
     'use strict';
 
-    if (window.PlugiitAnnouncements) {
+    if (window.Announcements) {
         return;
     }
 
@@ -392,7 +392,7 @@
         window.setInterval(updateCountdowns, 1000);
     }
 
-    window.PlugiitAnnouncements = {
+    window.Announcements = {
         closePopup: closePopup
     };
 })();

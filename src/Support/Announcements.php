@@ -1,9 +1,9 @@
 <?php
 
-namespace Azuriom\Plugin\PlugiitAnnouncements\Support;
+namespace Azuriom\Plugin\Announcements\Support;
 
 use Azuriom\Models\User;
-use Azuriom\Plugin\PlugiitAnnouncements\Models\Announcement;
+use Azuriom\Plugin\Announcements\Models\Announcement;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 
 class Announcements
 {
-    public const CACHE_KEY = 'plugiit-announcements.active';
+    public const CACHE_KEY = 'announcements.active';
 
     public const BAR_MODES = ['stacked', 'rotate'];
 
@@ -141,14 +141,14 @@ class Announcements
 
     public static function barMode(): string
     {
-        $mode = setting('plugiit-announcements.bar_mode', 'stacked');
+        $mode = setting('announcements.bar_mode', 'stacked');
 
         return in_array($mode, self::BAR_MODES, true) ? $mode : 'stacked';
     }
 
     public static function rotationDelay(): int
     {
-        return min(max((int) setting('plugiit-announcements.rotation_delay', 6), 3), 60);
+        return min(max((int) setting('announcements.rotation_delay', 6), 3), 60);
     }
 
     /**

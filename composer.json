@@ -1,10 +1,10 @@
 {
-    "name": "azuriom/plugiit-announcements",
+    "name": "azuriom/announcements",
     "type": "azuriom-plugin",
     "description": "Barre d'annonce et popups planifi\u00e9s",
     "autoload": {
         "psr-4": {
-            "Azuriom\\Plugin\\PlugiitAnnouncements\\": "src/"
+            "Azuriom\\Plugin\\Announcements\\": "src/"
         }
     },
     "replace": {

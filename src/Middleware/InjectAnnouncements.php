@@ -1,8 +1,8 @@
 <?php
 
-namespace Azuriom\Plugin\PlugiitAnnouncements\Middleware;
+namespace Azuriom\Plugin\Announcements\Middleware;
 
-use Azuriom\Plugin\PlugiitAnnouncements\Support\Announcements;
+use Azuriom\Plugin\Announcements\Support\Announcements;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -36,7 +36,7 @@ class InjectAnnouncements
                 return $response;
             }
 
-            $footer = view('plugiit-announcements::footer', [
+            $footer = view('announcements::footer', [
                 'popups' => $announcements['popups'],
                 'withBars' => $hasBars || $announcements['bars'] !== [],
             ])->render();
@@ -44,7 +44,7 @@ class InjectAnnouncements
             $content = substr_replace($content, $footer, $end, 0);
 
             if (! $hasBars && $announcements['bars'] !== []) {
-                $bars = view('plugiit-announcements::bars', [
+                $bars = view('announcements::bars', [
                     'bars' => $announcements['bars'],
                 ])->render();
 

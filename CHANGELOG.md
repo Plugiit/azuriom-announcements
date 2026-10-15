@@ -2,7 +2,8 @@
 
 ## 1.0.1
 
-- Fixed: the admin index route (`/admin/plugiit-announcements`) no longer uses a closure, so `php artisan route:cache` works on sites using the plugin.
+- Changed: the plugin id is now `announcements` (was `plugiit-announcements`). Tables, routes, permissions and settings follow the new id.
+- Fixed: the admin index route (`/admin/announcements`) no longer uses a closure, so `php artisan route:cache` works on sites using the plugin.
 
 ## 1.0.0
 

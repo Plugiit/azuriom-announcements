@@ -1,10 +1,10 @@
 <?php
 
-namespace Azuriom\Plugin\PlugiitAnnouncements\Models;
+namespace Azuriom\Plugin\Announcements\Models;
 
 use Azuriom\Models\Traits\Loggable;
-use Azuriom\Plugin\PlugiitAnnouncements\Support\Announcements;
-use Azuriom\Plugin\PlugiitAnnouncements\Support\HtmlSanitizer;
+use Azuriom\Plugin\Announcements\Support\Announcements;
+use Azuriom\Plugin\Announcements\Support\HtmlSanitizer;
 use Azuriom\Support\Markdown;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
@@ -58,7 +58,7 @@ class Announcement extends Model
      */
     private const CONTENT_ATTRIBUTES = ['title', 'message', 'format', 'button_label', 'button_url', 'type'];
 
-    protected $table = 'plugiit_announcements';
+    protected $table = 'announcements';
 
     protected $fillable = [
         'title', 'message', 'format', 'type', 'style', 'color', 'text_color',

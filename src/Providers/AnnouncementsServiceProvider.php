@@ -1,14 +1,14 @@
 <?php
 
-namespace Azuriom\Plugin\PlugiitAnnouncements\Providers;
+namespace Azuriom\Plugin\Announcements\Providers;
 
 use Azuriom\Extensions\Plugin\BasePluginServiceProvider;
 use Azuriom\Models\ActionLog;
 use Azuriom\Models\Permission;
-use Azuriom\Plugin\PlugiitAnnouncements\Middleware\InjectAnnouncements;
-use Azuriom\Plugin\PlugiitAnnouncements\Models\Announcement;
+use Azuriom\Plugin\Announcements\Middleware\InjectAnnouncements;
+use Azuriom\Plugin\Announcements\Models\Announcement;
 
-class PlugiitAnnouncementsServiceProvider extends BasePluginServiceProvider
+class AnnouncementsServiceProvider extends BasePluginServiceProvider
 {
     /**
      * The plugin's global HTTP middleware stack.
@@ -39,17 +39,17 @@ class PlugiitAnnouncementsServiceProvider extends BasePluginServiceProvider
         $this->registerAdminNavigation();
 
         Permission::registerPermissions([
-            'plugiit-announcements.admin' => 'plugiit-announcements::admin.permission',
+            'announcements.admin' => 'announcements::admin.permission',
         ]);
 
         ActionLog::registerLogModels([
             Announcement::class,
-        ], 'plugiit-announcements::admin.logs');
+        ], 'announcements::admin.logs');
 
-        ActionLog::registerLogs('plugiit-announcements.settings.updated', [
+        ActionLog::registerLogs('announcements.settings.updated', [
             'icon' => 'megaphone',
             'color' => 'info',
-            'message' => 'plugiit-announcements::admin.logs.settings',
+            'message' => 'announcements::admin.logs.settings',
         ]);
     }
 
@@ -61,15 +61,15 @@ class PlugiitAnnouncementsServiceProvider extends BasePluginServiceProvider
     protected function adminNavigation(): array
     {
         return [
-            'plugiit-announcements' => [
-                'name' => trans('plugiit-announcements::admin.nav.title'),
+            'announcements' => [
+                'name' => trans('announcements::admin.nav.title'),
                 'type' => 'dropdown',
                 'icon' => 'bi bi-megaphone',
-                'route' => 'plugiit-announcements.admin.*',
-                'permission' => 'plugiit-announcements.admin',
+                'route' => 'announcements.admin.*',
+                'permission' => 'announcements.admin',
                 'items' => [
-                    'plugiit-announcements.admin.announcements.index' => trans('plugiit-announcements::admin.nav.announcements'),
-                    'plugiit-announcements.admin.settings' => trans('plugiit-announcements::admin.nav.settings'),
+                    'announcements.admin.announcements.index' => trans('announcements::admin.nav.announcements'),
+                    'announcements.admin.settings' => trans('announcements::admin.nav.settings'),
                 ],
             ],
         ];

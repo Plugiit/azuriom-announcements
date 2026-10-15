@@ -1,10 +1,10 @@
 <?php
 
-namespace Azuriom\Plugin\PlugiitAnnouncements\Requests;
+namespace Azuriom\Plugin\Announcements\Requests;
 
 use Azuriom\Http\Requests\Traits\ConvertCheckbox;
-use Azuriom\Plugin\PlugiitAnnouncements\Models\Announcement;
-use Azuriom\Plugin\PlugiitAnnouncements\Support\HtmlSanitizer;
+use Azuriom\Plugin\Announcements\Models\Announcement;
+use Azuriom\Plugin\Announcements\Support\HtmlSanitizer;
 use Closure;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -67,7 +67,7 @@ class AnnouncementRequest extends FormRequest
      */
     public function attributes(): array
     {
-        return collect(trans('plugiit-announcements::admin.announcements.fields'))
+        return collect(trans('announcements::admin.announcements.fields'))
             ->only(array_keys($this->rules()))
             ->map(fn (string $label) => mb_strtolower($label))
             ->all();
